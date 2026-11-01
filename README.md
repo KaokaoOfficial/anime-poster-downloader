@@ -1,47 +1,47 @@
 # Anime Poster Downloader
 
-Questo repository contiene una raccolta di script Python per scaricare immagini legate a anime, manga e videogiochi ispirati all'universo anime.
+This repository contains a collection of Python scripts designed to download images related to anime, manga, and anime-inspired video games.
 
-## Versioni disponibili
+## Available Versions
 
 1. `scripts/01_basic_download.py`
-   - download semplice
-   - salva i poster in una cartella unica
+   - simple download
+   - saves posters to a single folder
 
 2. `scripts/02_foldered_download.py`
-   - salva i poster in sotto-cartelle organizzate per genere
+   - saves posters into subfolders organized by genre
 
 3. `scripts/03_multiprocessing_dataset.py`
-   - usa `multiprocessing` per velocizzare il download
-   - crea una struttura pronta per dataset `train/val/test`
+   - uses `multiprocessing` to speed up downloads
+   - creates a ready-to-use `train/val/test` dataset structure
 
 4. `scripts/04_multimedia_downloader.py`
-   - supporta anime, manga e videogiochi
-   - supporta limiti e pause di sicurezza
+   - supports anime, manga, and video games
+   - features download limits and rate-limiting delays
 
 5. `scripts/05_advanced_multimedia_downloader.py`
-   - modalità interattiva avanzata
-   - scelta tra cartella unica o per genere
-   - scelta tra anime, manga, giochi o tutti insieme
-   - scelta del numero di elementi da scaricare
-   - selezione lingua con rilevamento automatico del sistema
+   - advanced interactive mode
+   - option to choose between a single folder or genre-based organization
+   - option to select anime, manga, games, or all combined
+   - configurable download limit per media type
+   - language selection with automatic system language detection
 
 ## Setup
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # Linux/macOS
-# oppure .venv\Scripts\activate  # Windows
+# or .venv\Scripts\activate  # Windows
 pip install -r requirements.txt
 ```
 
-## Esecuzione
+## Running the Script
 
 ```bash
 python scripts/05_advanced_multimedia_downloader.py
 ```
 
-Oppure in modalità non interattiva:
+Or run in non-interactive mode:
 
 ```bash
 python scripts/05_advanced_multimedia_downloader.py --type all --limit 200 --mode genre --lang it
@@ -49,20 +49,20 @@ python scripts/05_advanced_multimedia_downloader.py --type anime --limit 100 --m
 python scripts/05_advanced_multimedia_downloader.py --type manga --limit 50 --mode genre --lang it
 ```
 
-## Script 05: opzioni principali
+## Script 05: Core Options
 
 ```bash
 python scripts/05_advanced_multimedia_downloader.py --help
 ```
 
-Opzioni utili:
+Key options:
 - `--type all|anime|manga|games`
 - `--mode single|genre`
-- `--limit 200` per fermarsi dopo N elementi per tipo
+- `--limit 200` stops after downloading N items per type
 - `--lang en|it|es|fr|de|ja|ru`
 - `--output-dir output`
-- `--no-prompt` per usare solo i parametri da riga di comando
+- `--no-prompt` relies strictly on command-line arguments
 
-## Nota
+## Note
 
-Per anime e manga si usa AniList. Per i giochi si richiede una chiave RAWG in variabile d'ambiente `RAWG_API_KEY` quando si vuole scaricare contenuti di tipo `games`.
+Anime and manga data are fetched via AniList. To download `games`, you'll need a RAWG API key set in your `RAWG_API_KEY` environment variable.
