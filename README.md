@@ -1,6 +1,6 @@
 # Anime Poster Downloader
 
-Questo repository contiene 3 versioni di uno script Python per scaricare poster di anime da AniList.
+Questo repository contiene 4 versioni di uno script Python per scaricare immagini legate ai contenuti anime e affini.
 
 ## Versioni disponibili
 
@@ -14,6 +14,13 @@ Questo repository contiene 3 versioni di uno script Python per scaricare poster 
 3. `scripts/03_multiprocessing_dataset.py`
    - usa `multiprocessing` per velocizzare il download
    - crea una struttura pronta per dataset `train/val/test`
+
+4. `scripts/04_multimedia_downloader.py`
+   - supporta anime, manga e videogiochi a tema anime/manga
+   - permette di interrompere con `Ctrl+C`
+   - supporta limiti `--limit`
+   - supporta `--resume` e `--update`
+   - salva in cartelle separate per tipo
 
 ## Setup
 
@@ -30,8 +37,26 @@ pip install -r requirements.txt
 python scripts/01_basic_download.py
 python scripts/02_foldered_download.py
 python scripts/03_multiprocessing_dataset.py
+python scripts/04_multimedia_downloader.py --type anime --limit 200
+python scripts/04_multimedia_downloader.py --type manga --limit 200 --resume
+python scripts/04_multimedia_downloader.py --type games --limit 200 --update
 ```
+
+## Script 04: opzioni principali
+
+```bash
+python scripts/04_multimedia_downloader.py --help
+```
+
+Opzioni utili:
+- `--type anime`
+- `--type manga`
+- `--type games`
+- `--limit 200` per fermarsi dopo N download
+- `--resume` per saltare i file già presenti
+- `--update` per aggiornare solo contenuti nuovi/nuovi file
+- `--output-dir output` per cambiare cartella di destinazione
 
 ## Nota
 
-I poster sono recuperati da AniList usando l'API GraphQL. Per evitare rate limit, i script includono piccoli ritardi e gestione errori.
+I poster sono recuperati da AniList usando l'API GraphQL per gli anime. Per manga e giochi si usano risorse pubbliche e API accessibili, con gestione degli errori e chiusura controllata. Il downloader supporta arresti manuali tramite `Ctrl+C`.
