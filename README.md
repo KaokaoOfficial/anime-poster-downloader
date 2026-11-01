@@ -1,6 +1,6 @@
 # Anime Poster Downloader
 
-Questo repository contiene 4 versioni di uno script Python per scaricare immagini legate ai contenuti anime e affini.
+Questo repository contiene una raccolta di script Python per scaricare immagini legate a anime, manga e videogiochi ispirati all'universo anime.
 
 ## Versioni disponibili
 
@@ -16,11 +16,15 @@ Questo repository contiene 4 versioni di uno script Python per scaricare immagin
    - crea una struttura pronta per dataset `train/val/test`
 
 4. `scripts/04_multimedia_downloader.py`
-   - supporta anime, manga e videogiochi a tema anime/manga
-   - permette di interrompere con `Ctrl+C`
-   - supporta limiti `--limit`
-   - supporta `--resume` e `--update`
-   - salva in cartelle separate per tipo
+   - supporta anime, manga e videogiochi
+   - supporta limiti e pause di sicurezza
+
+5. `scripts/05_advanced_multimedia_downloader.py`
+   - modalità interattiva avanzata
+   - scelta tra cartella unica o per genere
+   - scelta tra anime, manga, giochi o tutti insieme
+   - scelta del numero di elementi da scaricare
+   - selezione lingua con rilevamento automatico del sistema
 
 ## Setup
 
@@ -34,29 +38,31 @@ pip install -r requirements.txt
 ## Esecuzione
 
 ```bash
-python scripts/01_basic_download.py
-python scripts/02_foldered_download.py
-python scripts/03_multiprocessing_dataset.py
-python scripts/04_multimedia_downloader.py --type anime --limit 200
-python scripts/04_multimedia_downloader.py --type manga --limit 200 --resume
-python scripts/04_multimedia_downloader.py --type games --limit 200 --update
+python scripts/05_advanced_multimedia_downloader.py
 ```
 
-## Script 04: opzioni principali
+Oppure in modalità non interattiva:
 
 ```bash
-python scripts/04_multimedia_downloader.py --help
+python scripts/05_advanced_multimedia_downloader.py --type all --limit 200 --mode genre --lang it
+python scripts/05_advanced_multimedia_downloader.py --type anime --limit 100 --mode single --lang en
+python scripts/05_advanced_multimedia_downloader.py --type manga --limit 50 --mode genre --lang it
+```
+
+## Script 05: opzioni principali
+
+```bash
+python scripts/05_advanced_multimedia_downloader.py --help
 ```
 
 Opzioni utili:
-- `--type anime`
-- `--type manga`
-- `--type games`
-- `--limit 200` per fermarsi dopo N download
-- `--resume` per saltare i file già presenti
-- `--update` per aggiornare solo contenuti nuovi/nuovi file
-- `--output-dir output` per cambiare cartella di destinazione
+- `--type all|anime|manga|games`
+- `--mode single|genre`
+- `--limit 200` per fermarsi dopo N elementi per tipo
+- `--lang en|it|es|fr|de|ja|ru`
+- `--output-dir output`
+- `--no-prompt` per usare solo i parametri da riga di comando
 
 ## Nota
 
-I poster sono recuperati da AniList usando l'API GraphQL per gli anime. Per manga e giochi si usano risorse pubbliche e API accessibili, con gestione degli errori e chiusura controllata. Il downloader supporta arresti manuali tramite `Ctrl+C`.
+Per anime e manga si usa AniList. Per i giochi si richiede una chiave RAWG in variabile d'ambiente `RAWG_API_KEY` quando si vuole scaricare contenuti di tipo `games`.
